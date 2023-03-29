@@ -25,19 +25,19 @@ public class HumanClass {
         this.setName(hName);
         this.setSurName(hsName);
         this.setAge(hAge);
-        System.out.printf("Object HumanClas created. Name %s, SurName %s, Age %d", hName, hsName, hAge);
-        System.out.println();
+//        System.out.printf("Object HumanClas created. Name %s, SurName %s, Age %d", hName, hsName, hAge);
+//        System.out.println();
     }
 
     public HumanClass(String hName) {
         this(hName, "NoSurname", 0);
 
-        System.out.printf("Object HumanClas created. Name %s", hName);
-        System.out.println();
+//        System.out.printf("Object HumanClas created. Name %s", hName);
+//        System.out.println();
     }
     public HumanClass() {
         this("NoName", "NoFamily", 0);
-        System.out.println("Object HumanClas created. Name is not registerred");
+//        System.out.println("Object HumanClas created. Name is not registerred");
     }
 
 
@@ -120,10 +120,10 @@ public class HumanClass {
     }
 
     /**
-     * Метод добавляет или отца или мать в HashMap
+     * Метод добавляет объекту отца или мать в HashMap
+     * в зависимости от пола
      * если у отца или матери нет этого ребенка
      * то также добавляет его в childs
-     *
      * */
 
     public void setParent(HumanClass person) {
@@ -156,7 +156,9 @@ public class HumanClass {
         }
         else {
 
-            System.out.printf("Already married on %s", this.getPartner().getName());
+            System.out.printf("Cant marry %s:", partner.getName());
+            System.out.println();
+            System.out.printf("%s already married on %s", this.getName(), this.getPartner().getName());
 
         }
 

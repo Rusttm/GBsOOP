@@ -12,7 +12,7 @@ public class Main {
         woman.setName("Svetlana");
         woman.setSurName("Sidorova");
 
-        HumanClass womansister = new Woman("Vera", "Ivanova", 15);
+        HumanClass womansister = new Woman("Vera", "Sidorova", 15);
         HumanClass dauhter = new Woman("Anna", "Ivanova", 15);
 
         HumanClass mother = new Woman("Elena", "Petrova", 51);
