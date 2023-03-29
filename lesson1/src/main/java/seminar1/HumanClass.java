@@ -48,11 +48,11 @@ public class HumanClass {
     }
 
     public String getParents() {
-        return "Parents: \n" + "Father- " + this.father + "\n" + "Mother- " + this.mother;
+        return "Father- " + this.father + "\n" + "Mother- " + this.mother;
 
     }
     public String getChildren() {
-        String result = "Childrens: ";
+        String result = "";
         for (HumanClass child:
                 this.childs) {
             result += "\n" + child.getName();
@@ -89,7 +89,8 @@ public class HumanClass {
         this.parents.put("mother", mother);
     }
 /**
- * This method is checking
+ * This method is checking both partenrs for marriage
+ * and make them partners if not
  */
     public boolean setPartner(HumanClass partner) {
 
