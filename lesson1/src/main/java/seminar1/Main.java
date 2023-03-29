@@ -27,8 +27,6 @@ public class Main {
         System.out.printf("%s childs: \n%s", woman.getName(), woman.getChildrenNames());
         System.out.println();
 
-
-
         // Set parents to Vova
         man.setParents(father, mother);
         System.out.printf("%s parents: \n%s",man.getName(), man.getParentsNames());
