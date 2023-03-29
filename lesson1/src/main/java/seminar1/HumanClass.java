@@ -12,11 +12,11 @@ public class HumanClass {
     private String surName;
     private int age;
     private HumanClass partner;
-    public enum hSex {Male, Female};
+    public enum hSex {Male, Female}
     private String father;
     private String mother;
-    private HashMap<String, HumanClass> parents = new HashMap<>();
-    private HashSet<HumanClass> childs = new HashSet<>();
+    private final HashMap<String, HumanClass> parents = new HashMap<>();
+    private final HashSet<HumanClass> childs = new HashSet<>();
 
 
 
@@ -55,7 +55,7 @@ public class HumanClass {
         String result = "";
         for (HumanClass child:
                 this.childs) {
-            result += "\n" + child.getName();
+            result = result + " " + child.getName();
         }
         return result;
     }
@@ -92,16 +92,17 @@ public class HumanClass {
  * This method is checking both partenrs for marriage
  * and make them partners if not
  */
-    public boolean setPartner(HumanClass partner) {
+    public void setPartner(HumanClass partner) {
 
         if (this.getPartner() == null && partner.getPartner() == null) {
             this.partner = partner;
             partner.partner = this;
-            return  true;
+
         }
         else {
+
             System.out.printf("Already married on %s", this.getPartner().getName());
-            return  false;
+
         }
 
     }
