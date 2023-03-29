@@ -12,6 +12,7 @@ public class Man extends HumanClass{
 
     public Man() {
         this("NoName", "NoFamily", 0);
+        this.setHumanclassSex(String.valueOf(hSex.Male));
     }
 
     public hSex getSex() {

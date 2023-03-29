@@ -61,22 +61,25 @@ public class HumanClass {
         return result;
     }
 
-
-    public HashSet<HumanClass> getChilds() {
-        return this.childs;
+    public String getHumanclassSex() {
+        return humanclassSex;
     }
 
-    public HashMap<String, HumanClass> getParents() {
-        return this.parents;
-    }
+    //    public HashSet<HumanClass> getChilds() {
+//        return this.childs;
+//    }
+
+//    public HashMap<String, HumanClass> getParents() {
+//        return this.parents;
+//    }
 
     public HumanClass getPartner() {
         return partner;
     }
 
-    public int getAge() {
-        return age;
-    }
+//    public int getAge() {
+//        return age;
+//    }
 
     // setters
     public void setName(String name) {
@@ -91,10 +94,10 @@ public class HumanClass {
         this.age = age;
     }
 
+
 /**
  * Метод добавляет ребенка в HashSet
- * также добавляет ребенку отца и мать (партнеров)
- *
+ * также добавляет ребенку отца и мать (партнеров)*
  * */
     public void setChild(HumanClass  child) {
         if (this.childs.contains(child)) {
@@ -127,7 +130,7 @@ public class HumanClass {
      * */
 
     public void setParent(HumanClass person) {
-        if (person.humanclassSex == "Male") {
+        if (person.getHumanclassSex()=="Male") {
             this.father = person.getName();
             this.parents.put("father", person);
         }
