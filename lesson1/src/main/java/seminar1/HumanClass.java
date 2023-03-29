@@ -10,6 +10,7 @@ import java.util.HashSet;
 public class HumanClass {
     private String name;
     private String surName;
+    private String humanclassSex;
     private int age;
     private HumanClass partner;
     public enum hSex {Male, Female}
@@ -29,7 +30,7 @@ public class HumanClass {
     }
 
     public HumanClass(String hName) {
-        this(hName, "NULL", 0);
+        this(hName, "NoSurname", 0);
 
         System.out.printf("Object HumanClas created. Name %s", hName);
         System.out.println();
@@ -47,17 +48,26 @@ public class HumanClass {
         return this.name + " " + this.surName;
     }
 
-    public String getParents() {
+    public String getParentsNames() {
         return "Father- " + this.father + "\n" + "Mother- " + this.mother;
 
     }
-    public String getChildren() {
+    public String getChildrenNames() {
         String result = "";
         for (HumanClass child:
                 this.childs) {
             result = result + " " + child.getName();
         }
         return result;
+    }
+
+
+    public HashSet<HumanClass> getChilds() {
+        return this.childs;
+    }
+
+    public HashMap<String, HumanClass> getParents() {
+        return this.parents;
     }
 
     public HumanClass getPartner() {
@@ -81,17 +91,58 @@ public class HumanClass {
         this.age = age;
     }
 
+/**
+ * Метод добавляет ребенка в HashSet
+ * также добавляет ребенку отца и мать (партнеров)
+ *
+ * */
     public void setChild(HumanClass  child) {
-        this.childs.add(child);
-
+        if (this.childs.contains(child)) {
+            System.out.println("This child already is in HashSet");
+        }
+        else {
+            this.childs.add(child);
+        }
+        child.setParent(this);
     }
+
+
+    /**
+     * Метод добавляет отца и мать в HashMap
+     * */
 
     public void setParents(HumanClass father, HumanClass mother) {
         this.father = father.getName();
         this.mother = mother.getName();
         this.parents.put("father", father);
         this.parents.put("mother", mother);
+
     }
+
+    /**
+     * Метод добавляет или отца или мать в HashMap
+     * если у отца или матери нет этого ребенка
+     * то также добавляет его в childs
+     *
+     * */
+
+    public void setParent(HumanClass person) {
+        if (person.humanclassSex == "Male") {
+            this.father = person.getName();
+            this.parents.put("father", person);
+        }
+        else {
+            this.mother = person.getName();
+            this.parents.put("mother", person);
+        }
+        if (!person.childs.contains(this)) {
+            person.setChild(this);
+        }
+    }
+
+
+
+
 /**
  * This method is checking both partenrs for marriage
  * and make them partners if not
@@ -109,6 +160,10 @@ public class HumanClass {
 
         }
 
+    }
+
+    public void setHumanclassSex(String humanclassSex) {
+        this.humanclassSex = humanclassSex;
     }
 
     // toString

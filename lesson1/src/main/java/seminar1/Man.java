@@ -7,6 +7,7 @@ public class Man extends HumanClass{
         this.setName(hName);
         this.setSurName(hsName);
         this.setAge(hAge);
+        this.setHumanclassSex(String.valueOf(hSex.Male));
     }
 
     public Man() {

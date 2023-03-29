@@ -14,20 +14,24 @@ public class Main {
 
         HumanClass womansister = new Woman("Vera", "Ivanova", 15);
         HumanClass dauhter = new Woman("Anna", "Ivanova", 15);
+
         HumanClass mother = new Woman("Elena", "Petrova", 51);
         HumanClass father = new Man("Oleg", "Ivanov", 55);
-
+        HumanClass son = new Man("Viktor", "Ivanov", 5);
 
         // Set child to Vova
         man.setChild(dauhter);
-        System.out.printf("%s childs: \n%s", man.getName(), man.getChildren());
+        son.setParent(woman);
+        System.out.printf("%s childs: \n%s", man.getName(), man.getChildrenNames());
+        System.out.println();
+        System.out.printf("%s childs: \n%s", woman.getName(), woman.getChildrenNames());
         System.out.println();
 
 
 
         // Set parents to Vova
         man.setParents(father, mother);
-        System.out.printf("%s parents: \n%s",man.getName(), man.getParents());
+        System.out.printf("%s parents: \n%s",man.getName(), man.getParentsNames());
         System.out.println();
 
 
