@@ -64,6 +64,10 @@ public class HumanClass {
         return partner;
     }
 
+    public int getAge() {
+        return age;
+    }
+
     // setters
     public void setName(String name) {
         this.name = name;
