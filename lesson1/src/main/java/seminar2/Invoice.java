@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Invoice extends Document implements FinanceDocument, ProdDocument{
 
     // автоматически создаем корзину (список товаров в счете)
-    Cart invoiceCart = new Cart();
+    Cart invoiceCart;
     Company ownerComp;
     private int id = 1;
     private String name = "";
@@ -32,25 +32,49 @@ public class Invoice extends Document implements FinanceDocument, ProdDocument{
         this.date = dtf.format(now);
     }
 
-    public Invoice() {
+    @Override
+    public void printDocument() {
+        this.printInvoice();
+    }
+    public Invoice(Cart objCart) {
+        /*
+         * Счет имеет возможность добавлять товар при инициализации
+         * т.к. может быть создан из другого документа
+         *
+         * */
+        this.invoiceCart = objCart;
         this.id++;
         this.setDate();
+    }
+
+    public Invoice() {
+
+        /*
+        * Тестовый Счет автозаполнение
+        * */
+        this.id++;
+        this.setDate();
+        Cart newCart = new Cart();
         // создаем товары
         Product newProd1 = new Product("Iphone 12", 1000.00,1300.00, 0.2);
         Product newProd2 = new Product("Macbook Air", 2500.00,3000.00, 0.2);
         // добавляем товары в корзину
-        invoiceCart.addProd(newProd1, 5);
-        invoiceCart.addProd(newProd2, 3);
-        invoiceCart.addProd(newProd1, 1);
-        invoiceCart.getCartInvoiceView();
+        newCart.addProd(newProd1, 5);
+        newCart.addProd(newProd2, 3);
+        newCart.addProd(newProd1, 1);
+//        newCart.getCartInvoiceView();
+        this.invoiceCart = newCart;
     }
     public void addProd(Product objProd, int num) {
-        invoiceCart.addProd(objProd, num);
+        /* добавление в Счет эквивалентно добавление в корзину счета*/
+        this.invoiceCart.addProd(objProd, num);
     }
 
     public Cart getInvoiceCart() {
         return invoiceCart;
     }
+
+    /* печать документа*/
     public void printInvoice() {
         System.out.println("Компания: " + this.ownerComp.getName() + " ИНН: " + this.ownerComp.getItn());
         System.out.println("Счет номер " + this.getName() + " от " + this.getDate());

@@ -11,8 +11,9 @@ import java.time.format.DateTimeFormatter;
 public abstract class Document {
     private int id;
     private String date;
-    public abstract String getDate();
-    public abstract void setDate();
+    public abstract String getDate(); // документ должен уметь выдать дату
+    public abstract void setDate(); // документ должен уметь установить дату
+    public abstract void printDocument(); // документ должен иметь возможность печати
 
     public Document() {
         this.id += 1;
