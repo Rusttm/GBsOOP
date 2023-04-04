@@ -36,19 +36,9 @@ public class Invoice extends Document implements FinanceDocument, ProdDocument{
     public void printDocument() {
         this.printInvoice();
     }
-    public Invoice(Cart objCart) {
-        /*
-         * Счет имеет возможность добавлять товар при инициализации
-         * т.к. может быть создан из другого документа
-         *
-         * */
-        this.invoiceCart = objCart;
-        this.id++;
-        this.setDate();
-    }
+
 
     public Invoice() {
-
         /*
         * Тестовый Счет автозаполнение
         * */
@@ -64,7 +54,22 @@ public class Invoice extends Document implements FinanceDocument, ProdDocument{
         newCart.addProd(newProd1, 1);
 //        newCart.getCartInvoiceView();
         this.invoiceCart = newCart;
+//        this(newCart);
     }
+
+    public Invoice(Cart objCart) {
+        /*
+         * Счет имеет возможность добавлять товар при инициализации
+         * т.к. может быть создан из другого документа
+         *
+         * */
+        this.invoiceCart = objCart;
+        this.id++;
+        this.setDate();
+    }
+
+
+
     public void addProd(Product objProd, int num) {
         /* добавление в Счет эквивалентно добавление в корзину счета*/
         this.invoiceCart.addProd(objProd, num);
