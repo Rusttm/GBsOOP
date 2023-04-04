@@ -22,7 +22,8 @@ public class Cart {
         String prodName = prodObj.getName();
         this.cartProdNum += n;
         this.cartSum += n * prodObj.getPrice();
-        this.cartVatSum += this.cartSum / (1+prodObj.getVat());
+//        System.out.println();
+        this.cartVatSum += n * prodObj.getPrice() *  prodObj.getVat() / (1+prodObj.getVat());
         if (cartHash.containsKey(prodName)) {
             HashMap temp = cartHash.get(prodName);
             int numPos = (int) temp.get("count");
@@ -69,13 +70,11 @@ public class Cart {
             i++;
         }
 
-        System.out.println(result);
+//        System.out.println(result);
 
 
         return result;
     }
-
-
 
     public int getId() {
         return id;
