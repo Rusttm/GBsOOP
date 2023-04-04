@@ -6,7 +6,7 @@ package seminar2;
 *
 * */
 public interface FinanceDocument {
-    public  Float sumDoc();
-    public  Float vatDoc();
+    public  Double sumDoc();
+    public  Double vatDoc();
 
 }

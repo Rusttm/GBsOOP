@@ -7,5 +7,5 @@ package seminar2;
 *
 * */
 public interface ProdDocument {
-    public Float numSum();
+    public Double numSum();
 }
