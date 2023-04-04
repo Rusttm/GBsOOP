@@ -8,9 +8,9 @@ package seminar2;
 * */
 public interface FinanceDocument {
 
-    Double sumDoc();
-    Double vatDoc();
-    Company getOwner();
+    Double sumDoc(); // должен выдавать сумму документа
+    Double vatDoc(); // финансовый документ должен выдавать сумму налога
+    Company getOwner(); // финансовый документ должен выдавать организацию от которой он инициирован
 
 
 }
