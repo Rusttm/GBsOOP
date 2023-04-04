@@ -39,14 +39,38 @@ public class Cart {
         addProd(prodObj, 1);
     }
 
-        public void viewCart() {
-            for (String posName: cartHash.keySet()) {
-                System.out.println(posName);
-                System.out.println(cartHash.get(posName).get("count"));
-
-            }
-
+    public void viewCart() {
+        for (String posName: cartHash.keySet()) {
+            System.out.print(posName + " ");
+            System.out.print(cartHash.get(posName).get("count")+"шт.");
+            System.out.println();
         }
+
+    }
+    public HashMap getCartInvoiceView () {
+        HashMap result = new HashMap<>();
+
+        int i = 1;
+        for (String posName: cartHash.keySet()) {
+            ArrayList lineArray = new ArrayList<>();
+            Product ob = (Product) cartHash.get(posName).get("prod");
+            int numOfProd = (int) cartHash.get(posName).get("count");
+
+            lineArray.add(ob.getName());
+            lineArray.add(numOfProd);
+            lineArray.add(ob.getPrice());
+            lineArray.add(ob.getPrice() * numOfProd);
+            result.put(Integer.toString(i), lineArray);
+            i++;
+        }
+        System.out.println(result);
+
+
+        return result;
+    }
+
+
+
     public int getId() {
         return id;
     }

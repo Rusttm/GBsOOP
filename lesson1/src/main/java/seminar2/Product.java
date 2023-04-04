@@ -33,4 +33,16 @@ public class Product {
     public String getName() {
         return name;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public Double getCost() {
+        return cost;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
 }
