@@ -16,6 +16,7 @@ public class Invoice extends Document implements FinanceDocument, ProdDocument{
     Cart invoiceCart;
     Company ownerComp;
     private int id = 1;
+
     private String name = "";
     private String date = "";
 
@@ -48,10 +49,12 @@ public class Invoice extends Document implements FinanceDocument, ProdDocument{
         // создаем товары
         Product newProd1 = new Product("Iphone 12", 1000.00,1300.00, 0.2);
         Product newProd2 = new Product("Macbook Air", 2500.00,3000.00, 0.2);
+        Product newProd3 = new Product("Samsung S22", 1100.00,1400.00, 0.2);
         // добавляем товары в корзину
         newCart.addProd(newProd1, 5);
         newCart.addProd(newProd2, 3);
         newCart.addProd(newProd1, 1);
+        newCart.addProd(newProd3, 2);
 //        newCart.getCartInvoiceView();
         this.invoiceCart = newCart;
 //        this(newCart);
@@ -67,7 +70,6 @@ public class Invoice extends Document implements FinanceDocument, ProdDocument{
         this.id++;
         this.setDate();
     }
-
 
 
     public void addProd(Product objProd, int num) {
@@ -96,12 +98,17 @@ public class Invoice extends Document implements FinanceDocument, ProdDocument{
 
             i++;
         }
-        System.out.printf("Всего товара: %.0f шт.", this.numSum());
+        System.out.printf("Всего позиций: %d", this.invoiceCart.getNumPos());
+//        System.out.print(this.invoiceCart.getNumPos());
+        System.out.println();
+        System.out.printf("Количество товара: %.0f шт.", this.numSum());
         System.out.println();
         System.out.printf("Итого к оплате: %.2f руб.", this.sumDoc());
         System.out.println();
-        System.out.printf("В том числе НДС: %.2f", this.vatDoc());
+        System.out.printf("В том числе НДС: %.2f руб.", this.vatDoc());
         System.out.println();
+
+
     }
 
     @Override

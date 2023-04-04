@@ -8,6 +8,7 @@ import java.util.HashMap;
 * */
 public class Cart {
     private int id;
+    private int numPos;
     private double cartSum = 0.0;
     private double cartVatSum = 0.0;
     private double cartProdNum = 0.0;
@@ -19,6 +20,10 @@ public class Cart {
     }
 
     public void addProd(Product prodObj, int n) {
+        /*Добавляет в словарь корзины новую позицию если ее нет
+        * Либо добавляет указанное количество к имеющемуся уже в корзине
+        *
+        * */
         String prodName = prodObj.getName();
         this.cartProdNum += n;
         this.cartSum += n * prodObj.getPrice();
@@ -54,8 +59,7 @@ public class Cart {
 
     }
     public ArrayList<ArrayList> getCartInvoiceView () {
-        ArrayList<ArrayList> result = new ArrayList();
-        int i = 1;
+        ArrayList<ArrayList> result = new ArrayList<>();
         for (String posName: cartHash.keySet()) {
             ArrayList lineArray = new ArrayList<>();
             Product ob = (Product) cartHash.get(posName).get("prod");
@@ -67,7 +71,6 @@ public class Cart {
             lineArray.add(ob.getPrice());
             lineArray.add(costProdSum);
             result.add(lineArray);
-            i++;
         }
 
 //        System.out.println(result);
@@ -90,5 +93,17 @@ public class Cart {
 
     public double getCartVatSum() {
         return cartVatSum;
+    }
+
+    public HashMap<String, HashMap> getCartHash() {
+        /*Возможность получить словарь корзины{"name", objProd}
+        *
+        * */
+        return cartHash;
+    }
+
+    public int getNumPos() {
+        this.numPos = this.cartHash.size();
+        return numPos;
     }
 }
