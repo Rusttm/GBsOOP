@@ -8,9 +8,9 @@ package seminar2;
 * */
 public interface FinanceDocument {
 
-    public  Double sumDoc();
-    public  Double vatDoc();
-    public  Company getOwner();
+    Double sumDoc();
+    Double vatDoc();
+    Company getOwner();
 
 
 }

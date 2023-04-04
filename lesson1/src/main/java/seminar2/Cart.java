@@ -53,8 +53,8 @@ public class Cart {
         }
 
     }
-    public ArrayList getCartInvoiceView () {
-        ArrayList result = new ArrayList();
+    public ArrayList<ArrayList> getCartInvoiceView () {
+        ArrayList<ArrayList> result = new ArrayList();
         int i = 1;
         for (String posName: cartHash.keySet()) {
             ArrayList lineArray = new ArrayList<>();

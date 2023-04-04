@@ -83,11 +83,17 @@ public class Invoice extends Document implements FinanceDocument, ProdDocument{
     public void printInvoice() {
         System.out.println("Компания: " + this.ownerComp.getName() + " ИНН: " + this.ownerComp.getItn());
         System.out.println("Счет номер " + this.getName() + " от " + this.getDate());
-        ArrayList myInvoiceCart = this.invoiceCart.getCartInvoiceView();
+        ArrayList<ArrayList> myInvoiceCart = this.invoiceCart.getCartInvoiceView();
         int i = 1;
-        for (Object printLine: myInvoiceCart) {
+        System.out.println("№|Наименование|колво|Цена|Сумма|");
+        for (ArrayList printLine: myInvoiceCart) {
+            System.out.print(i);
+            for (Object elem :printLine) {
+                System.out.print("|"+ elem);
+            }
+            System.out.print("|");
+            System.out.println();
 
-            System.out.println(i + ":"+ printLine);
             i++;
         }
         System.out.printf("Всего товара: %.0f шт.", this.numSum());
