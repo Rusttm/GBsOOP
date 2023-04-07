@@ -5,6 +5,9 @@ package seminar3;
 * */
 public class Main {
     public static void main(String[] args) {
+        // создаем склад
+        Stock stock = new Stock("Москва1");
+
         System.out.println("Счет #1");
         // создаем Счет с автозаполнением
         Invoice newInvoice1 = new Invoice();
@@ -29,6 +32,7 @@ public class Main {
         //        добавляем товар в счет
         Product newProduct = new Product("Сумка", 300.00,500.00, 0.2);
         newInvoice2.addProd(newProduct, 1);
+        stock.put2Stock(newProduct);
         //        печатаем Счет
         newInvoice2.printInvoice();
 
