@@ -10,10 +10,5 @@ public class Main {
         // автозаполняем
         stock.stockTestFullFillment();
         System.out.println(stock.getStock("Москва1"));
-
-
-
-
-
     }
 }

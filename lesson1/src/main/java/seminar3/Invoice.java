@@ -20,6 +20,34 @@ public class Invoice extends Document implements InterfaceFinanceDocument, Inter
     private String name = "";
     private String date = "";
 
+    public static void main(String[] args) {
+        Invoice newInvoice = new Invoice();
+        newInvoice.invoiceTestFullFillment();
+        // устанавливаем реквизиты компании
+//        Company myCompany = new Company("7799999", "Муки Зву");
+//        newInvoice.setOwner(myCompany);
+        newInvoice.printInvoice();
+    }
+    public Invoice(Cart objCart) {
+        /*
+         * Счет имеет возможность добавлять товар при инициализации
+         * т.к. может быть создан из другого документа
+         * */
+        this.invoiceCart = objCart;
+        this.id++;
+        this.setDate();
+        this.ownerComp = new Company("______", "______");
+    }
+
+    public Invoice() {
+        /*
+         * пустой Счет
+         * */
+        this.id++;
+        this.setDate();
+        this.invoiceCart = new Cart();
+        this.ownerComp = new Company("______", "______");
+    }
     @Override
     public String getDate() {
         return this.date;
@@ -38,11 +66,12 @@ public class Invoice extends Document implements InterfaceFinanceDocument, Inter
         this.printInvoice();
     }
 
+    // тестовая реализация
     public void invoiceTestFullFillment() {
         // создаем товары
-        Product newProd1 = new Product("Iphone 12", 1000.00,1300.00, 0.2);
-        Product newProd2 = new Product("Macbook Air", 2500.00,3000.00, 0.2);
-        Product newProd3 = new Product("Samsung S22", 1100.00,1400.00, 0.2);
+        Product newProd1 = new Product("Iphone 12", 1000.00);
+        Product newProd2 = new Product("Macbook Air", 2500.00);
+        Product newProd3 = new Product("Samsung S22", 1100.00);
         // добавляем товары в корзину
         this.invoiceCart.addProd(newProd1, 5);
         this.invoiceCart.addProd(newProd2, 3);
@@ -52,26 +81,6 @@ public class Invoice extends Document implements InterfaceFinanceDocument, Inter
     }
 
 
-
-    public Invoice(Cart objCart) {
-        /*
-         * Счет имеет возможность добавлять товар при инициализации
-         * т.к. может быть создан из другого документа
-         * */
-        this.invoiceCart = objCart;
-        this.id++;
-        this.setDate();
-    }
-
-    public Invoice() {
-        /*
-         * пустой Счет
-         * */
-        this.id++;
-        this.setDate();
-        this.invoiceCart = new Cart();
-
-    }
 
     public void addProd(Product objProd, int num) {
         /* добавление в Счет эквивалентно добавление в корзину счета*/
@@ -124,12 +133,6 @@ public class Invoice extends Document implements InterfaceFinanceDocument, Inter
 
     @Override
     public Company getOwner() {
-        if (this.ownerComp!=null) {
-            return this.ownerComp;
-        }
-        else {
-            System.out.println("Организация не установлена");
-        }
         return this.ownerComp;
     }
 

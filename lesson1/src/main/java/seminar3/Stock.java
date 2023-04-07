@@ -38,14 +38,15 @@ public class Stock implements InterfaceStock {
     }
 
     public static void main(String[] args) {
-
-        Stock stock = new Stock("Москва1");
+        HashMap stockInfo = new HashMap<>();
+        stockInfo.put("address", "Moscow, Dmitrovskoye ave, 35");
+        stockInfo.put("phone", "8-495-1234567");
+        Stock stock = new Stock("Москва1", stockInfo);
         stock.stockTestFullFillment();
-
-        System.out.println(stock.getStock("Москва1")); // печатаем Склад
-        System.out.println(stock.getProdStockInfo("Зарядное устройство")); // общие данные по продукту
-        System.out.println(stock.getFromStock("Зарядное устройство", 2)); // Списываем товар(объекты) со склада
-        System.out.println(stock.getStock("Москва1"));// печатаем Склад
+        System.out.println("Склад:" + stock.getStock("Москва1")); // печатаем Склад
+        System.out.println("Позиция Зарядное устройство:" + stock.getProdStockInfo("Зарядное устройство")); // общие данные по продукту
+        System.out.println("Списываем Зарядное устройство:" + stock.getFromStock("Зарядное устройство", 2)); // Списываем товар(объекты) со склада
+        System.out.println("Склад остатки:" + stock.getStock("Москва1"));// печатаем Склад
     }
 
 /*
@@ -81,7 +82,7 @@ public class Stock implements InterfaceStock {
         }
         // проверяет есть ли такой объект в списке?
         if (productArray.contains(product)) {
-            System.out.println(product.getName() + "Такой товар(объект) уже есть на складе");
+            System.out.println(product.getName() + "Этот товар(объект) уже есть на складе");
         }
         else  {
             productArray.add(product);
