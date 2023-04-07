@@ -38,39 +38,40 @@ public class Invoice extends Document implements InterfaceFinanceDocument, Inter
         this.printInvoice();
     }
 
-
-    public Invoice() {
-        /*
-        * Тестовый Счет автозаполнение
-        * */
-        this.id++;
-        this.setDate();
-        Cart newCart = new Cart();
+    public void invoiceTestFullFillment() {
         // создаем товары
         Product newProd1 = new Product("Iphone 12", 1000.00,1300.00, 0.2);
         Product newProd2 = new Product("Macbook Air", 2500.00,3000.00, 0.2);
         Product newProd3 = new Product("Samsung S22", 1100.00,1400.00, 0.2);
         // добавляем товары в корзину
-        newCart.addProd(newProd1, 5);
-        newCart.addProd(newProd2, 3);
-        newCart.addProd(newProd1, 1);
-        newCart.addProd(newProd3, 2);
+        this.invoiceCart.addProd(newProd1, 5);
+        this.invoiceCart.addProd(newProd2, 3);
+        this.invoiceCart.addProd(newProd1, 1);
+        this.invoiceCart.addProd(newProd3, 2);
 //        newCart.getCartInvoiceView();
-        this.invoiceCart = newCart;
-//        this(newCart);
     }
+
+
 
     public Invoice(Cart objCart) {
         /*
          * Счет имеет возможность добавлять товар при инициализации
          * т.к. может быть создан из другого документа
-         *
          * */
         this.invoiceCart = objCart;
         this.id++;
         this.setDate();
     }
 
+    public Invoice() {
+        /*
+         * пустой Счет
+         * */
+        this.id++;
+        this.setDate();
+        this.invoiceCart = new Cart();
+
+    }
 
     public void addProd(Product objProd, int num) {
         /* добавление в Счет эквивалентно добавление в корзину счета*/

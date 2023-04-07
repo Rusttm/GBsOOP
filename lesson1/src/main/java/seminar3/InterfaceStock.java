@@ -20,5 +20,5 @@ public interface InterfaceStock<T, V>{
     public ArrayList<Product> getFromStock(String productName, int number);
 
     // дает информацию по товару
-    public HashMap getProdStockInfo(V productName);
+    public HashMap getProdStockInfo(String productName);
 }
