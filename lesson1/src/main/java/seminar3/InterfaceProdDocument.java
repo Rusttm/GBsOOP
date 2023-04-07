@@ -6,6 +6,6 @@ package seminar3;
 * товарный документ должен выдавать количество товара
 *
 * */
-public interface ProdDocument {
+public interface InterfaceProdDocument {
     public Double numSum();
 }

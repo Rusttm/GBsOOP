@@ -10,7 +10,7 @@ import java.util.ArrayList;
 * на основании двух интерфейсов
 * автоматически создается объект Корзина
 * */
-public class Invoice extends Document implements FinanceDocument, ProdDocument {
+public class Invoice extends Document implements InterfaceFinanceDocument, InterfaceProdDocument {
 
     // автоматически создаем корзину (список товаров в счете)
     Cart invoiceCart;

@@ -3,7 +3,7 @@ package seminar3;
 /*
 * Пока не рабочий интерфейс
 * */
-public interface CartInterface {
+public interface InterfaceCart {
     public double getCartSum();
     public double getCartProdNum();
     public double getCartVatSum();

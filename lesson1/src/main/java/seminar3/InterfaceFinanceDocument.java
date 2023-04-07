@@ -6,7 +6,7 @@ package seminar3;
 * а также организацию -владельца документа
 *
 * */
-public interface FinanceDocument {
+public interface InterfaceFinanceDocument {
 
     Double sumDoc(); // должен выдавать сумму документа
     Double vatDoc(); // финансовый документ должен выдавать сумму налога
