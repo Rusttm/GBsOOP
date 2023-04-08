@@ -10,7 +10,7 @@ public class Stock implements InterfaceStock {
     private int id;
 
     // информация по складу любые ключ-значение
-    private HashMap stock = new HashMap<>();
+    private HashMap stock;
     /*
     *непосредственно склад c перечислением товара
     * в виде HashMap {"name":название, "data": ArrayList}
@@ -54,6 +54,7 @@ public class Stock implements InterfaceStock {
 * */
     public Stock(String stockName, HashMap stockInfo) {
         this.id++;
+        this.stock = new HashMap<>();
         this.stockData = new HashMap<>();
         this.stock.put("name", stockName);
         this.stock.put("info", stockInfo);

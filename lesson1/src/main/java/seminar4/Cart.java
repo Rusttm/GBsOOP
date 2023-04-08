@@ -5,10 +5,11 @@ import java.util.HashMap;
 
 /*
 Корзина в которую складываются товары
+возвращает в виде {}
+cartHash имеет структуру {"name":{"count":количество в корзине, "price":цена по прайсу, "sumVat":сумма налога, "sumPrice":сумма по прайсу}
 * */
 public class Cart {
     private int id;
-    private int numPos;
     private double cartSum = 0.0;
     private double cartVatSum = 0.0;
     private double cartProdNum = 0.0;
@@ -19,31 +20,32 @@ public class Cart {
         this.id++;
     }
 
+    /*
+    * */
     public void addProd(Product prodObj, int n) {
         /*Добавляет в словарь корзины новую позицию если ее нет
         * Либо добавляет указанное количество к имеющемуся уже в корзине
-        *
         * */
         String prodName = prodObj.getName();
-        this.cartProdNum += n;
-        this.cartSum += n * prodObj.getPrice();
-//        System.out.println();
-        this.cartVatSum += n * prodObj.getPrice() *  prodObj.getVat() / (1+prodObj.getVat());
-        if (cartHash.containsKey(prodName)) {
-            HashMap temp = cartHash.get(prodName);
-            int numPos = (int) temp.get("count");
-            numPos += n;
-            temp.put("count", numPos);
-//            System.out.println("Такая позиция есть");
 
+        HashMap posInfo = new HashMap<>();
+        if (cartHash.containsKey(prodName)) {
+            posInfo = cartHash.get(prodName);
+            n += (int) posInfo.get("count");
         }
-        else {
-            HashMap prodHashMap = new HashMap<>();
-            prodHashMap.put("count", n);
-            prodHashMap.put("prod", prodObj);
-            cartHash.put(prodName, prodHashMap);
-//            System.out.println("Нет такой позиции");
-        }
+
+        double sumPrice = n * prodObj.getPrice();
+        double sumVat = sumPrice *  prodObj.getVat() / (1+prodObj.getVat());
+        this.cartProdNum += n;
+        this.cartSum += sumPrice;
+        this.cartVatSum += sumVat;
+        posInfo.put("count", n);
+        posInfo.put("price", prodObj.getPrice());
+        posInfo.put("sumVat", sumVat);
+        posInfo.put("sumPrice", sumPrice);
+        this.cartHash.put(prodName, posInfo);
+
+
 
     }
     public void addProd(Product prodObj) {
@@ -58,24 +60,22 @@ public class Cart {
         }
 
     }
+
+    /*возвращает список строк для распечатки
+    * строка вида [наименование\\ количество \\ цена \\ сумма налога \\ сумма по прайсу]*/
     public ArrayList<ArrayList> getCartInvoiceView () {
         ArrayList<ArrayList> result = new ArrayList<>();
+        HashMap prodInfo = new HashMap<>();
         for (String posName: cartHash.keySet()) {
             ArrayList lineArray = new ArrayList<>();
-            Product ob = (Product) cartHash.get(posName).get("prod");
-            int numOfProd = (int) cartHash.get(posName).get("count");
-//            System.out.println(ob.getPrice());
-            double costProdSum = ob.getPrice() * numOfProd;
-            lineArray.add(ob.getName());
-            lineArray.add(numOfProd);
-            lineArray.add(ob.getPrice());
-            lineArray.add(costProdSum);
+            prodInfo = (HashMap) cartHash.get(posName);
+            lineArray.add(posName);
+            lineArray.add(prodInfo.get("count"));
+            lineArray.add(prodInfo.get("price"));
+            lineArray.add(prodInfo.get("sumVat"));
+            lineArray.add(prodInfo.get("sumPrice"));
             result.add(lineArray);
         }
-
-//        System.out.println(result);
-
-
         return result;
     }
 
@@ -103,7 +103,6 @@ public class Cart {
     }
 
     public int getNumPos() {
-        this.numPos = this.cartHash.size();
-        return numPos;
+        return this.cartHash.size();
     }
 }
