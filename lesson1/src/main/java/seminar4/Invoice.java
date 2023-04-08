@@ -97,7 +97,7 @@ public class Invoice extends Document implements InterfaceFinanceDocument, Inter
         System.out.println("Счет номер " + this.getName() + " от " + this.getDate());
         ArrayList<ArrayList> myInvoiceCart = this.invoiceCart.getCartInvoiceView();
         int i = 1;
-        System.out.println("№|Наименование|колво|Цена|Сумма|");
+        System.out.println("№|Наименование|колво|Цена|Сумма налога|Сумма|");
         for (ArrayList printLine: myInvoiceCart) {
             System.out.print(i);
             for (Object elem :printLine) {

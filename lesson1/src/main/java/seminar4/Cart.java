@@ -1,5 +1,6 @@
 package seminar4;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -27,22 +28,27 @@ public class Cart {
         * Либо добавляет указанное количество к имеющемуся уже в корзине
         * */
         String prodName = prodObj.getName();
-
-        HashMap posInfo = new HashMap<>();
-        if (cartHash.containsKey(prodName)) {
-            posInfo = cartHash.get(prodName);
-            n += (int) posInfo.get("count");
-        }
-
         double sumPrice = n * prodObj.getPrice();
         double sumVat = sumPrice *  prodObj.getVat() / (1+prodObj.getVat());
         this.cartProdNum += n;
         this.cartSum += sumPrice;
         this.cartVatSum += sumVat;
+
+        HashMap posInfo = new HashMap<>();
+        if (cartHash.containsKey(prodName)) {
+            posInfo = cartHash.get(prodName);
+            n += (int) posInfo.get("count");
+            System.out.println(posInfo.get("sumVat").getClass());
+            System.out.println(sumVat);
+            sumVat += Double.parseDouble((String) posInfo.get("sumVat"));
+            sumPrice += Double.parseDouble((String) posInfo.get("sumPrice"));
+
+        }
+        DecimalFormat df = new DecimalFormat("0.00");
         posInfo.put("count", n);
         posInfo.put("price", prodObj.getPrice());
-        posInfo.put("sumVat", sumVat);
-        posInfo.put("sumPrice", sumPrice);
+        posInfo.put("sumVat", df.format(sumVat));
+        posInfo.put("sumPrice", df.format(sumPrice));
         this.cartHash.put(prodName, posInfo);
 
 
@@ -80,11 +86,11 @@ public class Cart {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public double getCartSum() {
-        return cartSum;
+        return this.cartSum;
     }
 
     public double getCartProdNum() {
