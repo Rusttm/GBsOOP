@@ -73,7 +73,7 @@ public class Invoice extends Document implements InterfaceFinanceDocument, Inter
         Product newProd2 = new Product("Macbook Air", 2500.00);
         Product newProd3 = new Product("Samsung S22", 1100.00);
         // добавляем товары в корзину
-        this.invoiceCart.addProd(newProd1, 5);
+        this.invoiceCart.addProd(newProd1, 4);
         this.invoiceCart.addProd(newProd2, 3);
         this.invoiceCart.addProd(newProd1, 1);
         this.invoiceCart.addProd(newProd3, 2);
