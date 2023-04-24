@@ -2,16 +2,16 @@ package seminar4;
 
 import java.util.HashMap;
 
-public class Product {
+public class Product <T extends String> {
     private int id = 0; // уникальный код
-    String name; // название
-    Double cost; // себестоимость
-    Double price; // прайсовая цена
-    Double vat = 0.2; // ставка НДС
+    T name; // название
+    double cost; // себестоимость
+    double price; // прайсовая цена
+    double vat; // ставка НДС
     PriceList priceList = new PriceList(); // прайс
 
 
-    public Product(String name, Double cost, Double price, Double VAT) {
+    public Product(T name, double cost, double price, double VAT) {
         this.id++;
         this.name = name;
         this.cost = cost;
@@ -19,7 +19,7 @@ public class Product {
         priceList.setProdPrice(name, price);
         this.vat = VAT;
     }
-    public Product(String name, Double cost) {
+    public Product(T name, double cost) {
         this.id++;
         this.name = name;
         this.cost = cost;
@@ -29,7 +29,7 @@ public class Product {
     }
 
     public Product() {
-        this("Noname product", 0.0);
+        this((T) "Noname product", 0.0);
     }
 
     public HashMap getProdInfo() {
@@ -41,15 +41,18 @@ public class Product {
         return result;
     }
 
-    public String getName() {
+    public T getName() {
+
         return name;
     }
 
     public int getId() {
+
         return id;
     }
 
     public Double getCost() {
+
         return cost;
     }
 
@@ -63,7 +66,7 @@ public class Product {
 
 //        return price;
     }
-
+//Возвращает значение НДС
     public Double getVat() {
         return vat;
     }

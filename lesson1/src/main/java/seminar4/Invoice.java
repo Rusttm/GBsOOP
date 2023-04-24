@@ -50,6 +50,7 @@ public class Invoice extends Document implements InterfaceFinanceDocument, Inter
     }
     @Override
     public String getDate() {
+
         return this.date;
     }
 
@@ -63,6 +64,7 @@ public class Invoice extends Document implements InterfaceFinanceDocument, Inter
 
     @Override
     public void printDocument() {
+
         this.printInvoice();
     }
 
@@ -137,7 +139,7 @@ public class Invoice extends Document implements InterfaceFinanceDocument, Inter
     }
 
     public String getName() {
-        if (name == "") {
+        if (this.name == "") {
             return Integer.toString(this.id);
         }
         return name;
