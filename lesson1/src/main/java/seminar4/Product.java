@@ -2,7 +2,7 @@ package seminar4;
 
 import java.util.HashMap;
 
-public class Product <T extends String> {
+public class Product <T extends String, V> {
     private int id = 0; // уникальный код
     T name; // название
     double cost; // себестоимость
@@ -67,7 +67,7 @@ public class Product <T extends String> {
 //        return price;
     }
 //Возвращает значение НДС
-    public Double getVat() {
+    public double getVat() {
         return vat;
     }
 

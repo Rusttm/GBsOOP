@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 /*Склад возвращает HashMap {name:складНазвание, info:складИнформация, data: {названиеТовара:, [obj Товар1,obj Товар2]}} склада
 * */
-public class Stock implements InterfaceStock {
+public class Stock<T> implements InterfaceStock {
     // код склада
     private int id;
 
@@ -41,7 +41,8 @@ public class Stock implements InterfaceStock {
         HashMap stockInfo = new HashMap<>();
         stockInfo.put("address", "Moscow, Dmitrovskoye ave, 35");
         stockInfo.put("phone", "8-495-1234567");
-        Stock stock = new Stock("Москва1", stockInfo);
+        Stock<String> stock = new Stock("Москва1", stockInfo);
+        Stock<Integer> stock2 = new Stock(45, stockInfo);
         stock.stockTestFullFillment();
         System.out.println("Склад:" + stock.getStock("Москва1")); // печатаем Склад
         System.out.println("Позиция Зарядное устройство:" + stock.getProdStockInfo("Зарядное устройство")); // общие данные по продукту
@@ -49,10 +50,9 @@ public class Stock implements InterfaceStock {
         System.out.println("Склад остатки:" + stock.getStock("Москва1"));// печатаем Склад
     }
 
-/*
-* Инициализация создает HashMap
+/* Инициализация создает HashMap
 * */
-    public Stock(String stockName, HashMap stockInfo) {
+    public Stock(T stockName, HashMap stockInfo) {
         this.id++;
         this.stockData = new HashMap<>();
         this.stock.put("name", stockName);
@@ -61,7 +61,7 @@ public class Stock implements InterfaceStock {
     }
 
     public Stock(String stockName) {
-        this(stockName, new HashMap<String,String>());
+        this((T) stockName, new HashMap<String,String>());
     }
 
     @Override
