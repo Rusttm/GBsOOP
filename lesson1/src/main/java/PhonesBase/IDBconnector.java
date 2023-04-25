@@ -18,10 +18,14 @@ public interface IDBconnector {
      * @ updProd2DB() изменить продукт в БД
      * */
     ArrayList getFilteredDB();
-    HashMap getProductByID();
+
+    HashMap getProductByID(String id);
+
     ArrayList getAllDb();
     boolean putProd2DB();
-    boolean delProdFromDB();
+
+    boolean delProdFromDB(String id);
+
     boolean updProd2DB();
 
 }
