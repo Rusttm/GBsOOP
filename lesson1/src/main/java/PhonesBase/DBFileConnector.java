@@ -19,6 +19,16 @@ public class DBFileConnector implements IDBconnector {
 //        ArrayList testDataBase = DBFullFillment();
         DBFileConnector newConnect = new DBFileConnector("PhoneDB");
         newConnect.DBFullFillment();
+        HashMap<String, String> prod4 = new HashMap<>();
+        prod4.put("id", "4");
+        prod4.put("name", "Google");
+        System.out.println(newConnect.putProd2DB(prod4));
+        HashMap<String, String> prod5 = new HashMap<>();
+        prod5.put("id", "1");
+        prod5.put("name", "IPhon");
+        System.out.println(newConnect.putProd2DB(prod5));
+
+
 //        System.out.println(newConnect.dataBase);
 //        newConnect.write2FileFromArray("PhoneDB", testDataBase);
 //        System.out.println();
@@ -144,7 +154,6 @@ public class DBFileConnector implements IDBconnector {
     @Override
     public HashMap getProductByID(String id) {
         for (HashMap<String,String> prod: this.dataBase) {
-
 //            Не понятно, почему он не может сравнить две строки?, приходится возводить следующую конструкцию
             String value = prod.get("id");
             if ( value.compareTo(id) ==0 ) {
@@ -159,8 +168,21 @@ public class DBFileConnector implements IDBconnector {
         return this.dataBase;
     }
 
+
+    /**Кладет новый продукт в Базу
+     * @param newProd продукт в виде HashMap
+     * @return получилось или нет?
+     */
     @Override
-    public boolean putProd2DB() {
+    public boolean putProd2DB(HashMap<String, String> newProd) {
+        String newValue = newProd.get("id");
+        HashMap isNotNew = this.getProductByID(newValue);
+        if (isNotNew==null) {
+            this.dataBase.add(newProd);
+            this.write2FileFromArray(this.dataBase);
+            return true;
+        }
+        System.out.println("Продукт с данным id уже существует");
         return false;
     }
 

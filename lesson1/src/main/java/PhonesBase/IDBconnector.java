@@ -22,7 +22,8 @@ public interface IDBconnector {
     HashMap getProductByID(String id);
 
     ArrayList getAllDb();
-    boolean putProd2DB();
+
+    boolean putProd2DB(HashMap<String, String> prod);
 
     boolean delProdFromDB(String id);
 
