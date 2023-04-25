@@ -13,8 +13,15 @@ public interface IDBconnector {
      * @ getFilteredDB() выдает данные по фильтрам
      * @ getProductByID() выдает продукт по ID
      * @ getAllDb() выдает всю базу
+     * @ putProd2DB() положить продукт в БД
+     * @ delProdFromDB() удалить продукт из БД
+     * @ updProd2DB() изменить продукт в БД
      * */
     ArrayList getFilteredDB();
     HashMap getProductByID();
     ArrayList getAllDb();
+    boolean putProd2DB();
+    boolean delProdFromDB();
+    boolean updProd2DB();
+
 }
