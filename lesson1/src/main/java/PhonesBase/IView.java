@@ -9,18 +9,18 @@ public interface IView {
     /**
     * View должен получать: список фильтров, либо запрос на конкретную модель
     * выдавать список отфильтрованных телефонов, список фильтров
-    * @getPhoneFilters() фильтры для отбора телефонов
-    * @printPhonesFiltered() печатает список отфильтрованных телефонов
-    * @printFilters() получает все возможные фильтры телефонов
-     * @getPhoneData() получает данные конкретного телефона
-     * @printPhoneData() печатает данные конкретного телефона
+    * @ getPhoneFilters() фильтры для отбора телефонов
+    * @ printPhonesFiltered() печатает список отфильтрованных телефонов
+    * @ printFilters() получает все возможные фильтры телефонов
+     * @ getPhoneData() получает данные конкретного телефона
+     * @ printPhoneData() печатает данные конкретного телефона
      *
     */
 
-    public ArrayList printFilters();
-    public HashMap getPhoneFilters();
-    public ArrayList printPhonesFiltered();
-    public HashMap getPhoneData();
-    public HashMap printPhoneData();
+    ArrayList printFilters();
+    HashMap getPhoneFilters();
+    ArrayList printPhonesFiltered();
+    HashMap getPhoneData();
+    HashMap printPhoneData();
 
 }

@@ -7,12 +7,12 @@ import java.util.HashMap;
 public interface IProductModel<T> {
     public int id = 0;
     /** модель должна получать
-     * @getProdName() название
-     * @getProdId()id продукта
-     * @getProd() непосредственно получет данные по продукту
+     * @ getProdName() название
+     * @ getProdId()id продукта
+     * @ getProd() непосредственно получет данные по продукту
      * */
-    public HashMap<String, T> getProd();
-    public String getProdName();
-    public String getProdId();
+    HashMap<String, T> getProd();
+    String getProdName();
+    String getProdId();
 
 }

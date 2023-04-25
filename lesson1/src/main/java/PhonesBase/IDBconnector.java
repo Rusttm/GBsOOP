@@ -10,11 +10,11 @@ import java.util.HashMap;
 public interface IDBconnector {
     /**Коннектор базы данных по телефонам(любым продуктам)
      * должен получать данные из файла или БД и выдавать из по запросу
-     * @getFilteredDB() выдает данные по фильтрам
-     * @getProductByID() выдает продукт по ID
-     * @getAllDb() выдает всю базу
+     * @ getFilteredDB() выдает данные по фильтрам
+     * @ getProductByID() выдает продукт по ID
+     * @ getAllDb() выдает всю базу
      * */
-    public ArrayList getFilteredDB();
-    public HashMap getProductByID();
-    public ArrayList getAllDb();
+    ArrayList getFilteredDB();
+    HashMap getProductByID();
+    ArrayList getAllDb();
 }
