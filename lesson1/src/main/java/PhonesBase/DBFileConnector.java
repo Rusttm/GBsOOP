@@ -1,6 +1,7 @@
 package PhonesBase;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,7 +24,7 @@ public class DBFileConnector implements IDBconnector {
         HashMap<String,String> newFilter = new HashMap<>();
         newFilter.put("memory","64");
         newFilter.put("name","honor");
-        System.out.printf("По фильтру %s найдено ", newFilter.toString());
+        System.out.printf("По фильтру %s найдено ", newFilter);
         System.out.println(newConnect.getFilteredDB(newFilter));
 //        System.out.println(newConnect.dataBase);
 //        HashMap<String, String> prod5 = new HashMap<>();
@@ -93,21 +94,18 @@ public class DBFileConnector implements IDBconnector {
 
 
     public boolean write2FileFromArray(ArrayList dataArray) {
-        Writer writer = null;
-        try {
-            writer = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(this.fileName), "utf-8"));
-            for (Object prodOb: dataArray) {
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(this.fileName), StandardCharsets.UTF_8))) {
+            for (Object prodOb : dataArray) {
 //                System.out.println(prodOb);
-                writer.write(prodOb.toString()+"\n");
+                writer.write(prodOb.toString() + "\n");
             }
             return true;
         } catch (IOException ex) {
             // Report
             return false;
-        } finally {
-            try {writer.close();} catch (Exception ex) {/*ignore*/}
         }
+        /*ignore*/
     }
 
     /** дополнительный модуль для конвертации из строки файла в Hashmap
@@ -120,8 +118,7 @@ public class DBFileConnector implements IDBconnector {
         HashMap<String, String> newProd = new HashMap<>();
         // split key:value
         String[] pairs = strNew.split(", ");
-        for (int i = 0; i < pairs.length; i++) {
-            String pair = pairs[i];
+        for (String pair : pairs) {
             String[] keyValue = pair.split("=");
             newProd.put(keyValue[0], keyValue[1]);
         }
@@ -232,7 +229,7 @@ public class DBFileConnector implements IDBconnector {
         if (isNotNew==null) {
             this.dataBase.add(newProd);
             this.write2FileFromArray(this.dataBase);
-            System.out.printf("Продукт %s добавлен", newProd.toString());
+            System.out.printf("Продукт %s добавлен", newProd);
             System.out.println();
             return true;
         }
@@ -243,7 +240,7 @@ public class DBFileConnector implements IDBconnector {
     @Override
     public boolean delProdFromDB(String id) {
         ArrayList workArray = this.dataBase;
-        HashMap<String,String> prod = new HashMap<>();
+        HashMap<String,String> prod;
         for (int i = 0; i < this.dataBase.size(); i++) {
             prod = (HashMap) workArray.get(i);
             String value = prod.get("id");
@@ -251,7 +248,7 @@ public class DBFileConnector implements IDBconnector {
                 workArray.remove(i);
                 this.write2FileFromArray(workArray);
                 this.readFromFile2Array();
-                System.out.printf("Продукт %s удален", prod.toString());
+                System.out.printf("Продукт %s удален", prod);
                 System.out.println();
                 return true;
             }
@@ -270,7 +267,7 @@ public class DBFileConnector implements IDBconnector {
             this.dataBase.remove(isNotNew);
             this.dataBase.add(updProd);
             this.write2FileFromArray(this.dataBase);
-            System.out.printf("Продукт %s обновлен на %s", isNotNew.toString(),updProd.toString());
+            System.out.printf("Продукт %s обновлен на %s", isNotNew, updProd);
             System.out.println();
             return true;
         }
