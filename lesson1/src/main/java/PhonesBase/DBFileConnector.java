@@ -23,7 +23,7 @@ public class DBFileConnector implements IDBconnector {
         newConnect.DBFullFillment();
         HashMap<String,String> newFilter = new HashMap<>();
         newFilter.put("memory","64");
-        newFilter.put("name","honor");
+//        newFilter.put("name","honor");
         System.out.printf("По фильтру %s найдено ", newFilter);
         System.out.println(newConnect.getFilteredDB(newFilter));
 //        System.out.println(newConnect.dataBase);
@@ -171,11 +171,13 @@ public class DBFileConnector implements IDBconnector {
 //                    Исключаем, если не подходит
                     if ( value.toLowerCase().compareTo(filterValue.toLowerCase()) !=0 ) {
                         removeIndexes.add(i);
+//                        resultArray.remove(i);
                     }
 
                 } catch (Exception e) {
 //                    System.out.printf("В продукте %s не найдено значение %s",prod.toString(), filterKey);
                     removeIndexes.add(i);
+//                    resultArray.remove(i);
 //                    throw new RuntimeException(e);
                 }
 
