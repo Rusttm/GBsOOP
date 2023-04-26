@@ -1,6 +1,7 @@
 package PhonesBase;
 
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Controller {
 
@@ -9,7 +10,16 @@ public class Controller {
 
     public static void main(String[] args) {
         Controller newController = new Controller();
-        newController.mainPage();
+        Scanner myButton = new Scanner(System.in);
+        String button = "s";
+        while (button != "x") {
+            if (button == "s") {
+                newController.mainPage();
+            }
+
+            button = myButton.nextLine().toString();
+            System.out.println(button);
+        }
 
     }
 
@@ -24,6 +34,7 @@ public class Controller {
     public void mainPage() {
         PhoneView newView = new PhoneView();
         newView.printAllPhones(this.mainConnector.getAllFromFile());
+        newView.printMainCommands();
 
     }
 
