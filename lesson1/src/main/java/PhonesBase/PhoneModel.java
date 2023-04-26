@@ -8,13 +8,14 @@ import java.util.LinkedList;
 /**
  * Модель телефона
  */
-public class PhoneModel implements IProductModel<HashMap> {
+public class PhoneModel extends HashMap implements IProductModel<HashMap> {
 
     int id = 0;
+    private static int counter;
     private LinkedList<String> phoneLabels;
     private LinkedList<String> phoneLabelsExt;
     private HashSet<String> phoneChar;
-    private HashMap prod;
+    private HashMap prod = new HashMap();
     private HashSet<String> ProdNesFields = new HashSet();
     private HashMap<String,String> prodCharFields = new HashMap();
 
@@ -26,70 +27,84 @@ public class PhoneModel implements IProductModel<HashMap> {
      * Метод для тестовой проверки методов класса
      */
     public static void fullFillment() {
-        HashMap<String,String> newProdMap = new HashMap<>();
-        newProdMap.put("name","Andriod");
-        newProdMap.put("memory","128");
-        newProdMap.put("memory2","128.5");
-        newProdMap.put("model","Nova");
-        newProdMap.put("screen","6,74");
-        newProdMap.put("brand","Huawei");
-        newProdMap.put("year","2016");
-        newProdMap.put("price","10000");
-        PhoneModel newPhone1 = new PhoneModel(newProdMap);
-        HashMap<String,String> newProdMap2 = new HashMap<>();
-        newProdMap2.put("name","Andriod");
-        newProdMap2.put("model","X6");
-        newProdMap2.put("screen","6,5");
-        newProdMap2.put("memory","128");
-        newProdMap2.put("brand","Honor");
-        newProdMap2.put("year","2019");
-        newProdMap2.put("price","17000");
-        newProdMap2.put("descr","Best seller");
-        PhoneModel newPhone2 = new PhoneModel(newProdMap2);
-        HashMap<String,String> newProdMap3 = new HashMap<>();
-        newProdMap3.put("name","Iphone");
-        newProdMap3.put("model","12 Max Pro");
-        newProdMap3.put("screen","6,8");
-        newProdMap3.put("memory","64");
-        newProdMap3.put("brand","Apple");
-        newProdMap3.put("year","2021");
-        newProdMap3.put("price","100000");
-        newProdMap3.put("additionalInfo1","скидка");
-        PhoneModel newPhone3 = new PhoneModel(newProdMap3);
-        HashMap<String,String> newProdMap4 = new HashMap<>();
-        newProdMap4.put("name","Iphone");
-        newProdMap4.put("model","12 Max Pro");
-        newProdMap4.put("screen","6,8");
-        newProdMap4.put("memory","64");
-        newProdMap4.put("brand","Apple");
-        newProdMap4.put("year","2021");
-        newProdMap4.put("price","100000");
-        newProdMap4.put("ref","Восстановлен");
-        PhoneModel newPhone4 = new PhoneModel(newProdMap4);
-        newPhone1.getProdLabel();
-        System.out.println(newPhone1.getProdDescr());
-        System.out.println(newPhone1.getProdCharTable());
-        newPhone2.getProdLabel();
-        System.out.println(newPhone2.getProdDescr());
-        newPhone3.getProdLabel();
-        System.out.println(newPhone3.getProdDescr());
-        newPhone4.getProdLabel();
-        System.out.println(newPhone4.getProdDescr());
-    }
-    public PhoneModel(HashMap prod) {
-        this.id ++;
-        this.setProdNesFields();
-        prod.put("id", Integer.toString(this.id));
+        PhoneModel newPhone1 = new PhoneModel();
+        newPhone1.putKey("name","Android");
+        newPhone1.putKey("memory","128");
+        newPhone1.putKey("memory2","128.5");
+        newPhone1.putKey("model","Nova");
+        newPhone1.putKey("screen","6,74");
+        newPhone1.putKey("brand","Huawei");
+        newPhone1.putKey("year","2016");
+        newPhone1.putKey("price","10000");
+        newPhone1.putKey("name","Andriod"); // не должен брать
 
+        PhoneModel newPhone2 = new PhoneModel();
+        newPhone2.putKey("name","Iphone");
+        newPhone2.putKey("model","12 Max Pro");
+        newPhone2.putKey("screen","6,8");
+        newPhone2.putKey("memory","64");
+        newPhone2.putKey("brand","Apple");
+        newPhone2.putKey("year","2021");
+        newPhone2.putKey("price","100000");
+        newPhone2.putKey("additionalInfo1","скидка");
+
+        PhoneModel newPhone3 = new PhoneModel();
+        newPhone3.putKey("name","Iphone");
+        newPhone3.putKey("model","12 Max Pro");
+        newPhone3.putKey("screen","6,8");
+        newPhone3.putKey("memory","64");
+        newPhone3.putKey("brand","Apple");
+        newPhone3.putKey("year","2021");
+        newPhone3.putKey("price","100000");
+        newPhone3.putKey("ref","Восстановлен");
+
+        PhoneModel newPhone4 = new PhoneModel();
+        newPhone4.putKey("name","Android");
+        newPhone4.putKey("model","Pixel");
+        newPhone4.putKey("screen","6,1");
+        newPhone4.putKey("memory","32");
+        newPhone4.putKey("brand","Google");
+        newPhone4.putKey("year","2015");
+        newPhone4.putKey("price","10000");
+    }
+
+    public PhoneModel() {
+        this.id = counter;
+        counter ++;
+//        System.out.printf("counter = %d", counter);
+//        System.out.println();
+        this.setProdNesFields();
+        this.phoneLabels = new LinkedList<String>();
+        this.phoneLabelsExt = new LinkedList<String>();
+        this.phoneChar = new HashSet<>();
+    }
+
+
+    /** Устананавливает новые пары ключ-значение
+     * @param key ключ
+     * @param value значение
+     */
+    public void putKey(String key, String value) {
+
+        if (this.prod.get(key) == null) {
+            this.prod.put(key,value);
+        }
+        this.setProdNesFields();
+//        this.putKey("id", Integer.toString(this.id));
+        prod.put("id", Integer.toString(this.id));
         this.prod = prod;
-       if (this.checkNesFields(prod)) {
-           this.phoneLabels = new LinkedList<String>();
-           this.phoneLabelsExt = new LinkedList<String>();
-           this.phoneChar = new HashSet<>();
-       } else {
-           System.out.println("Телефон не создан т.к. отсутствуют некоторые поля");
-            throw new IllegalArgumentException("Необходимо добавить поля, вызов списка полей - getProdNesFields()");
-       }
+//        if (this.checkNesFields(prod)) {
+//            this.phoneLabels = new LinkedList<String>();
+//            this.phoneLabelsExt = new LinkedList<String>();
+//            this.phoneChar = new HashSet<>();
+//        } else {
+//            System.out.println("Телефон не создан т.к. отсутствуют некоторые поля");
+//            throw new IllegalArgumentException("Необходимо добавить поля, вызов списка полей - getProdNesFields()");
+//        }
+    }
+    public void updKey(String key, String value) {
+        this.prod.put(key,value);
+        this.setProdNesFields();
     }
 
 
@@ -153,7 +168,7 @@ public class PhoneModel implements IProductModel<HashMap> {
 
     @Override
     public String getProdId() {
-        return null;
+        return Integer.toString(this.id);
     }
 
     @Override

@@ -11,8 +11,8 @@ import java.util.Scanner; // Import the Scanner class to read text files
 /**
  * Коннектор к файлу с телефонами
  */
-public class DBFileConnector implements IDBconnector {
-    private ArrayList<HashMap> dataBase;
+public class DBFileConnector implements IDBconnector<PhoneModel> {
+    private ArrayList<HashMap> dataBase = new ArrayList<>();
     private final String fileName;
     public static void main(String[] args) {
 //        Тестовые наполнения:
@@ -43,11 +43,19 @@ public class DBFileConnector implements IDBconnector {
 
     }
 
+    /** Коннектор к файлу
+     * @param fileName
+     */
     public DBFileConnector(String fileName) {
         this.fileName = fileName;
-        this.dataBase = this.readFromFile2Array();
+        this.dataBase = this.getAllFromFile();
+        System.out.println("Connector in created");
     }
-
+    public DBFileConnector() {
+        this.fileName = "PhoneDB";
+        new DBFileConnector("PhoneDB");
+//        this.dataBase = this.readFromFile2Array();
+    }
 
     /** Вспомогательный метод Создает файл
      * @param fileName название файла
@@ -65,7 +73,6 @@ public class DBFileConnector implements IDBconnector {
             e.printStackTrace();
         }
     }
-
 
     /** считывает данные из файла в массив HashMap
      * @return массив
@@ -118,6 +125,9 @@ public class DBFileConnector implements IDBconnector {
         HashMap<String, String> newProd = new HashMap<>();
         // split key:value
         String[] pairs = strNew.split(", ");
+        if (pairs[0] == "") {
+            return newProd;
+        }
         for (String pair : pairs) {
             String[] keyValue = pair.split("=");
             newProd.put(keyValue[0], keyValue[1]);
@@ -155,7 +165,6 @@ public class DBFileConnector implements IDBconnector {
 
     }
 
-
     @Override
     public ArrayList getFilteredDB(HashMap<String, String> filterMap) {
         ArrayList resultArray = new ArrayList<>();
@@ -180,10 +189,8 @@ public class DBFileConnector implements IDBconnector {
 //                    resultArray.remove(i);
 //                    throw new RuntimeException(e);
                 }
-
             }
 //            System.out.println(removeIndexes);
-
         }
         for (int i = 0; i < this.dataBase.size(); i++) {
 //            System.out.println(removeIndexes.contains(i));
@@ -191,21 +198,24 @@ public class DBFileConnector implements IDBconnector {
 //                    System.out.println(removeIndexes.contains(i));
                     resultArray.add(this.dataBase.get(i));
             }
-
         }
-
-
         return resultArray;
     }
 
     @Override
-    public HashMap getProductByID(String id) {
-        for (HashMap<String,String> prod: this.dataBase) {
+    public HashMap getProductFromDBByID(String id) {
+        if (this.dataBase == null) {
+            return null;
+        }
+        for (HashMap<String,String> prodHashSring: this.dataBase) {
 //            Не понятно, почему он не может сравнить две строки?, приходится возводить следующую конструкцию
-            String value = prod.get("id");
-            if ( value.compareTo(id) ==0 ) {
-                return prod;
+            String value = prodHashSring.get("id");
+            if (value != null) {
+                if ( value.compareTo(id) ==0 ) {
+                    return prodHashSring;
+                }
             }
+
         }
         return null;
     }
@@ -218,25 +228,60 @@ public class DBFileConnector implements IDBconnector {
         return this.dataBase;
     }
 
+    @Override
+    public ArrayList getAllFromFile() {
+        // read data to ArrayList dataBase
+        ArrayList<HashMap> resultArray = new ArrayList<>();
+        try {
+            File myObj = new File(this.fileName);
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                if (data != "") {
+                    resultArray.add(convertStr2HashMap(data));
+                } else {
+                    return null;
+                }
+
+            }
+            myReader.close();
+            return resultArray;
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
     /**Кладет новый продукт в Базу
      * @param newProd продукт в виде HashMap
      * @return получилось или нет?
      */
     @Override
-    public boolean putProd2DB(HashMap<String, String> newProd) {
-        String newValue = newProd.get("id");
-        // Сначала проверить есть ли в базе?
-        HashMap isNotNew = this.getProductByID(newValue);
-        if (isNotNew==null) {
-            this.dataBase.add(newProd);
+    public boolean putProd2DB(PhoneModel newProd) {
+        String newValue = newProd.getProdId();
+        this.dataBase = this.getAllFromFile();
+
+        if (this.dataBase == null) {
+            this.setDataBase();
+            this.dataBase.add(newProd.getProd());
             this.write2FileFromArray(this.dataBase);
-            System.out.printf("Продукт %s добавлен", newProd);
-            System.out.println();
             return true;
+        } else {
+            // Сначала проверить есть ли в базе?
+            HashMap isNotNew = this.getProductFromDBByID(newValue);
+            // проверить на наличие правильных ключей
+            if (isNotNew==null) {
+                this.dataBase.add(newProd.getProd());
+                this.write2FileFromArray(this.dataBase);
+                System.out.printf("Продукт %s добавлен", newProd.getProdLabel());
+                System.out.println();
+                return true;
+            }
+            System.out.println("Продукт с данным id уже существует");
+            return false;
         }
-        System.out.println("Продукт с данным id уже существует");
-        return false;
     }
 
     @Override
@@ -249,7 +294,7 @@ public class DBFileConnector implements IDBconnector {
             if ( value.compareTo(id) ==0 ) {
                 workArray.remove(i);
                 this.write2FileFromArray(workArray);
-                this.readFromFile2Array();
+                this.getAllFromFile();
                 System.out.printf("Продукт %s удален", prod);
                 System.out.println();
                 return true;
@@ -261,15 +306,16 @@ public class DBFileConnector implements IDBconnector {
 
 
     @Override
-    public boolean updProd2DB(HashMap<String, String> updProd) {
-        String updValue = updProd.get("id");
+    public boolean updProd2DB(PhoneModel updProd) {
+        String updIDValue = updProd.getProdId();
+        this.dataBase = this.getAllFromFile();
         // Сначала проверить есть ли в базе?
-        HashMap isNotNew = this.getProductByID(updValue);
+        HashMap isNotNew = this.getProductFromDBByID(updIDValue);
         if (isNotNew!=null) {
             this.dataBase.remove(isNotNew);
-            this.dataBase.add(updProd);
+            this.dataBase.add(updProd.getProd());
             this.write2FileFromArray(this.dataBase);
-            System.out.printf("Продукт %s обновлен на %s", isNotNew, updProd);
+            System.out.printf("Продукт %s обновлен на %s", isNotNew, updProd.getProd());
             System.out.println();
             return true;
         }
@@ -283,5 +329,10 @@ public class DBFileConnector implements IDBconnector {
 
     public String getFileName() {
         return fileName;
+    }
+
+    public void setDataBase() {
+        ArrayList dataBase = new ArrayList<>();
+        this.dataBase = dataBase;
     }
 }

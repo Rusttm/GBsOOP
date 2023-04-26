@@ -14,6 +14,7 @@ import java.util.HashSet;
  * */
 public interface IProductModel<T> {
     public int id = 0;
+    public static int counter=0;
 
     /** Метод возвращает объект продукта
      * @return
@@ -26,12 +27,19 @@ public interface IProductModel<T> {
      */
     String getProdLabel();
 
-
-    /**Выдает список необходимых полей (ключи) для заполнения
+    /**Выдает список обязательных полей (ключи) для заполнения
      * @return ArrayList
      */
     HashSet<String> getProdNesFields();
+
+    /** Возвращает id продукта
+     * @return String
+     */
     String getProdId();
+
+    /** возвращает описание продукта
+     * @return String
+     */
     String getProdDescr();
     /** Метод возвращает HashMap с указанием характеристик продукта
      * @return

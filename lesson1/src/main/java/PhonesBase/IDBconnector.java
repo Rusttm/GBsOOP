@@ -15,7 +15,7 @@ import java.util.HashMap;
  * @ delProdFromDB() удалить продукт из БД
  * @ updProd2DB() изменить продукт в БД
  * */
-public interface IDBconnector {
+public interface IDBconnector <T> {
 
 
     /** Метод выдает продукты которые подходят по фильтрам
@@ -28,19 +28,25 @@ public interface IDBconnector {
      * @param id искомого продукта
      * @return возвращает сам продукт если он существует в базе, и null -если нет
      */
-    HashMap getProductByID(String id);
+    HashMap getProductFromDBByID(String id);
 
 
-    /** Метод выдает всю базу
+    /** Метод выдает всю базу из памяти
      * @return в виде ArrayList
      */
     ArrayList getAllDb();
+
+    /** Метод выдает всю базу из Файла
+     * @return в виде ArrayList
+     */
+    ArrayList getAllFromFile();
+
 
     /** Метод для добавления продукта
      * @param prod новые данные в виде HashMap
      * @return возвращает true если добавил, и false -если нет
      */
-    boolean putProd2DB(HashMap<String, String> prod);
+    boolean putProd2DB(T prod);
 
     boolean delProdFromDB(String id);
 
@@ -49,5 +55,5 @@ public interface IDBconnector {
      * @param updProd новые данные в виде HashMap
      * @return возвращает true если обновил, и false -если не обновил
      */
-    boolean updProd2DB(HashMap<String, String> updProd);
+    boolean updProd2DB(T updProd);
 }
