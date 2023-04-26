@@ -83,7 +83,6 @@ public class PhoneModel extends HashMap implements IProductModel<HashMap> {
         this.phoneChar = new HashSet<>();
     }
 
-
     /** Устананавливает новые пары ключ-значение
      * @param key ключ
      * @param value значение

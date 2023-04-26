@@ -304,7 +304,6 @@ public class DBFileConnector implements IDBconnector<PhoneModel> {
         return false;
     }
 
-
     @Override
     public boolean updProd2DB(PhoneModel updProd) {
         String updIDValue = updProd.getProdId();

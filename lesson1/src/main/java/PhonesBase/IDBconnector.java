@@ -48,6 +48,11 @@ public interface IDBconnector <T> {
      */
     boolean putProd2DB(T prod);
 
+
+    /** удаляет позицию по id
+     * @param id указать id удаляемой позиции
+     * @return true если успешно
+     */
     boolean delProdFromDB(String id);
 
 

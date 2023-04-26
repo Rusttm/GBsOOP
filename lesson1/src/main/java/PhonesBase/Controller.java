@@ -1,24 +1,40 @@
 package PhonesBase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class Controller {
 
     private DBFileConnector mainConnector;
+    private Scanner button1 = new Scanner(System.in);
+    private Scanner field1 = new Scanner(System.in);
 
 
     public static void main(String[] args) {
         Controller newController = new Controller();
         Scanner myButton = new Scanner(System.in);
         String button = "s";
-        while (button != "x") {
-            if (button == "s") {
+        while (button.compareTo("x")!=0) {
+            if (button.compareTo("s") == 0) {
+                newController.mainPage();
+                button = myButton.next().toString();
+            }
+            if (button.compareTo("d") == 0) {
+                newController.deletePage();
+                button = myButton.next().toString();
+                if (button.compareTo("s") != 0) {
+                    newController.deleteElem(button);
+                    newController.mainPage();
+                }
+            }
+            if (button.compareTo("n") == 0) {
+                newController.makePage();
                 newController.mainPage();
             }
 
-            button = myButton.nextLine().toString();
-            System.out.println(button);
+            button = myButton.next().toString();
         }
 
     }
@@ -35,7 +51,52 @@ public class Controller {
         PhoneView newView = new PhoneView();
         newView.printAllPhones(this.mainConnector.getAllFromFile());
         newView.printMainCommands();
+    }
+    public void deletePage() {
+        PhoneView newView = new PhoneView();
+        newView.printAllPhones(this.mainConnector.getAllFromFile());
+        newView.printDelCommands();
+    }
+    public void makePage() {
+        PhoneView newView = new PhoneView();
+        PhoneModel newPhone = new PhoneModel();
+        ArrayList fields = new ArrayList<>(newPhone.getProdNesFields());
+//        fields = newPhone.getProdNesFields();
+        boolean completed = true;
+        HashMap<String, String> prod = new HashMap<>();
+        String field = "m";
+        for (int i = 0; i < fields.size() ; i++) {
+            if (fields.get(i).toString().compareTo("id") == 0) {
+                continue;
+            }
+            newView.makePhone(fields.get(i).toString());
+            field = this.field1.next().toString();
+            if (field.compareTo("s") != 0) {
+                newPhone.putKey(fields.get(i).toString(), field.toString());
+            } else {
+                completed = false;
+                break;
+            }
+        }
+        if (completed) {
+            this.mainConnector.putProd2DB(newPhone);
+            System.out.println("Товар создан");
+        }
 
+    }
+
+    public void deleteElem(String posNum) {
+        ArrayList posList = this.mainConnector.getAllFromFile();
+        HashMap<String,String> pos = new HashMap<>();
+        for (int i = 0; i < posList.size() ; i++) {
+            if (posNum.compareTo(Integer.toString(i+1)) == 0) {
+                pos = (HashMap) posList.get(i);
+                System.out.printf("Удаляем %sй элемент", pos.get("id"));
+                System.out.println();
+                this.mainConnector.delProdFromDB(pos.get("id"));
+                break;
+            }
+        }
     }
 
     public void fullFillment() {
