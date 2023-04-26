@@ -4,15 +4,31 @@ import java.util.HashMap;
 
 public class Controller {
 
+    private DBFileConnector mainConnector;
+
 
     public static void main(String[] args) {
-        fullFillment();
-
-
+        Controller newController = new Controller();
+        newController.mainPage();
 
     }
-    public static void fullFillment() {
-        DBFileConnector newPhoneConnector = new DBFileConnector();
+
+    public Controller() {
+        this.mainConnector = new DBFileConnector();
+        this.fullFillment();
+    }
+
+    /**
+     * Показывает, какие позиции есть в Базе?
+     */
+    public void mainPage() {
+        PhoneView newView = new PhoneView();
+        newView.printAllPhones(this.mainConnector.getAllFromFile());
+
+    }
+
+    public void fullFillment() {
+        DBFileConnector newPhoneConnector = this.mainConnector;
 
         PhoneModel newPhone1 = new PhoneModel();
         newPhone1.putKey("name","Redmi MI9");
@@ -24,10 +40,8 @@ public class Controller {
         newPhone1.putKey("year","2018");
         newPhone1.putKey("price","10000");
 //        newPhone1.putKey("name","Andriod"); // не должен брать
-        System.out.println(newPhone1.getProdId());
-
+//        System.out.println(newPhone1.getProdId());
         newPhoneConnector.putProd2DB(newPhone1);
-
 
         PhoneModel newPhone2 = new PhoneModel();
         newPhone2.putKey("name","Iphone");
@@ -38,7 +52,7 @@ public class Controller {
         newPhone2.putKey("year","2021");
         newPhone2.putKey("price","100000");
         newPhone2.putKey("additionalInfo1","скидка");
-        System.out.println(newPhone2.getProdId());
+//        System.out.println(newPhone2.getProdId());
         newPhoneConnector.putProd2DB(newPhone2);
 
         PhoneModel newPhone3 = new PhoneModel();

@@ -1,5 +1,5 @@
-{memory=128, year=2018, price=10000, name=Redmi MI9, screen=6,74, model=MI9, id=0, brand=Xiaomi}
-{memory=64, additionalInfo1=скидка, year=2021, price=100000, name=Iphone, screen=6,8, model=12 Max Pro, id=1, brand=Apple}
-{ref=Восстановлен, memory=64, year=2021, price=100000, name=Iphone, screen=6,8, model=12 Max Pro, id=2, brand=Apple}
-{memory=32, year=2015, price=10000, name=Android, screen=6,1, model=Pixel, id=3, brand=Google}
-{memory=128, memory2=128.5, year=2016, price=10000, name=Android10, screen=6,74, model=Nova, id=4, brand=Huawei}
+{descr=Описание отсутствует, memory=128, year=2018, price=10000, name=Redmi MI9, screen=6,74, model=MI9, id=0, label=Redmi MI9 MI9 128 (Xiaomi), brand=Xiaomi}
+{descr=Описание отсутствует, memory=64, additionalInfo1=скидка, year=2021, price=100000, name=Iphone, screen=6,8, model=12 Max Pro, id=1, label=Iphone 12 Max Pro 64 (Apple), brand=Apple}
+{descr=Описание отсутствует, ref=Восстановлен, memory=64, year=2021, price=100000, name=Iphone, screen=6,8, model=12 Max Pro, id=2, label=Iphone 12 Max Pro 64 (Apple), brand=Apple}
+{descr=Описание отсутствует, memory=32, year=2015, price=10000, name=Android, screen=6,1, model=Pixel, id=3, label=Android Pixel 32 (Google), brand=Google}
+{descr=Описание отсутствует, memory=128, memory2=128.5, year=2016, price=10000, name=Android10, screen=6,74, model=Nova, id=4, label=Android10 Nova 128 (Huawei), brand=Huawei}

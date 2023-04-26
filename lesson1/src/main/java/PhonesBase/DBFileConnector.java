@@ -24,8 +24,8 @@ public class DBFileConnector implements IDBconnector<PhoneModel> {
         HashMap<String,String> newFilter = new HashMap<>();
         newFilter.put("memory","64");
 //        newFilter.put("name","honor");
-        System.out.printf("По фильтру %s найдено ", newFilter);
-        System.out.println(newConnect.getFilteredDB(newFilter));
+//        System.out.printf("По фильтру %s найдено ", newFilter);
+//        System.out.println(newConnect.getFilteredDB(newFilter));
 //        System.out.println(newConnect.dataBase);
 //        HashMap<String, String> prod5 = new HashMap<>();
 //        prod5.put("id", "1");
@@ -49,7 +49,7 @@ public class DBFileConnector implements IDBconnector<PhoneModel> {
     public DBFileConnector(String fileName) {
         this.fileName = fileName;
         this.dataBase = this.getAllFromFile();
-        System.out.println("Connector in created");
+//        System.out.println("Connector in created");
     }
     public DBFileConnector() {
         this.fileName = "PhoneDB";
@@ -275,11 +275,11 @@ public class DBFileConnector implements IDBconnector<PhoneModel> {
             if (isNotNew==null) {
                 this.dataBase.add(newProd.getProd());
                 this.write2FileFromArray(this.dataBase);
-                System.out.printf("Продукт %s добавлен", newProd.getProdLabel());
-                System.out.println();
+//                System.out.printf("Продукт %s добавлен", newProd.getProdLabel());
+//                System.out.println();
                 return true;
             }
-            System.out.println("Продукт с данным id уже существует");
+//            System.out.println("Продукт с данным id уже существует");
             return false;
         }
     }
@@ -315,8 +315,8 @@ public class DBFileConnector implements IDBconnector<PhoneModel> {
             this.dataBase.remove(isNotNew);
             this.dataBase.add(updProd.getProd());
             this.write2FileFromArray(this.dataBase);
-            System.out.printf("Продукт %s обновлен на %s", isNotNew, updProd.getProd());
-            System.out.println();
+//            System.out.printf("Продукт %s обновлен на %s", isNotNew, updProd.getProd());
+//            System.out.println();
             return true;
         }
         System.out.println("Продукт не найден в базе");

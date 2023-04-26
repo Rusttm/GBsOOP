@@ -75,7 +75,11 @@ public class PhoneModel extends HashMap implements IProductModel<HashMap> {
 //        System.out.println();
         this.setProdNesFields();
         this.phoneLabels = new LinkedList<String>();
+        this.phoneLabels.add("name");
+        this.phoneLabels.add("model");
+        this.phoneLabels.add("memory");
         this.phoneLabelsExt = new LinkedList<String>();
+        this.phoneLabelsExt.add("brand");
         this.phoneChar = new HashSet<>();
     }
 
@@ -107,20 +111,18 @@ public class PhoneModel extends HashMap implements IProductModel<HashMap> {
         this.setProdNesFields();
     }
 
-
     @Override
     public HashMap getProd() {
+        this.prod.put("label", this.getProdLabel());
+        this.prod.put("descr", this.getProdDescr());
         return this.prod;
     }
+
 
     @Override
     public String getProdLabel() {
         String labelPhone = "";
         String labelPhoneExt = "";
-        this.phoneLabels.add("name");
-        this.phoneLabels.add("model");
-        this.phoneLabels.add("memory");
-        this.phoneLabelsExt.add("brand");
         for (String key: this.phoneLabels) {
             labelPhone += this.prod.get(key) + " ";
         }
@@ -130,7 +132,7 @@ public class PhoneModel extends HashMap implements IProductModel<HashMap> {
         }
         labelPhone += "(" + labelPhoneExt + ")";
     }
-        System.out.println(labelPhone);
+//        System.out.println(labelPhone);
         return labelPhone;
     }
 
