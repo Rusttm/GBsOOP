@@ -12,7 +12,7 @@ import java.util.Scanner; // Import the Scanner class to read text files
  */
 public class DBFileConnector implements IDBconnector {
     private ArrayList<HashMap> dataBase;
-    private String fileName;
+    private final String fileName;
     public static void main(String[] args) {
 //        Тестовые наполнения:
 //        GenerateDBFile("PhoneDB");
@@ -280,5 +280,9 @@ public class DBFileConnector implements IDBconnector {
 
     public ArrayList<HashMap> getDataBase() {
         return dataBase;
+    }
+
+    public String getFileName() {
+        return fileName;
     }
 }
