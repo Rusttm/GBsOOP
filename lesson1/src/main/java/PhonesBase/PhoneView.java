@@ -16,20 +16,31 @@ public class PhoneView implements IView {
     }
 
     public void printMainCommands() {
-        System.out.println("Нажмите:");
-        System.out.println("порядковый номер (1,2 ...) для просмотра описания");
+        System.out.println("Введите:");
+        System.out.println("i -для просмотра описания элементов");
         System.out.println("n -для создания нового элемента");
         System.out.println("d -для удаления элемента");
+
     }
     public void printDelCommands() {
-        System.out.println("Нажмите:");
+        System.out.println("Введите:");
         System.out.println("порядковый номер (1,2 ...) для удаления");
         System.out.println("s -для возврата в меню");
     }
     public void makePhone(String key) {
         System.out.printf("Введите значение поля %s:", key);
         System.out.println();
-        System.out.println("Или нажмите:");
+        System.out.println("Или Введите:");
         System.out.println("s -для возврата в меню");
+    }
+    public void printDescrCommands() {
+        System.out.println("Введите:");
+        System.out.println("порядковый номер (1,2 ...) для просмотра описания");
+        System.out.println("s -для возврата в меню");
+    }
+    public void descrPhone() {
+        System.out.println("Введите:");
+        System.out.println("s -для возврата в меню");
+        System.out.println("i -для просмотра описания элементов");
     }
 }

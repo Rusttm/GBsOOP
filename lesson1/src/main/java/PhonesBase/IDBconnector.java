@@ -22,24 +22,24 @@ public interface IDBconnector <T> {
      * @param filterMap получает на входе HashMap {фильтр:значение}
      * @return возвращает ArrayList с продуктами, либо пустой
      */
-    ArrayList getFilteredDB(HashMap<String, String> filterMap);
+    ArrayList<HashMap<String,String>> getFilteredDB(HashMap<String, String> filterMap);
 
     /** Метод для выдачи продукта по id
      * @param id искомого продукта
      * @return возвращает сам продукт если он существует в базе, и null -если нет
      */
-    HashMap getProductFromDBByID(String id);
+    HashMap<String,String> getProductFromDBByID(String id);
 
 
     /** Метод выдает всю базу из памяти
      * @return в виде ArrayList
      */
-    ArrayList getAllDb();
+    ArrayList<HashMap<String,String>> getAllDb();
 
     /** Метод выдает всю базу из Файла
      * @return в виде ArrayList
      */
-    ArrayList getAllFromFile();
+    ArrayList<HashMap<String,String>> getAllFromFile();
 
 
     /** Метод для добавления продукта

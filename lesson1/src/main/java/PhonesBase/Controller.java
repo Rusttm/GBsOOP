@@ -29,6 +29,15 @@ public class Controller {
                     newController.mainPage();
                 }
             }
+            if (button.compareTo("i") == 0) {
+                newController.infoPage();
+                button = myButton.next().toString();
+                if (button.compareTo("s") != 0) {
+                    newController.describElem(button);
+                    newController.descrPage();
+
+                }
+            }
             if (button.compareTo("n") == 0) {
                 newController.makePage();
                 newController.mainPage();
@@ -56,6 +65,28 @@ public class Controller {
         PhoneView newView = new PhoneView();
         newView.printAllPhones(this.mainConnector.getAllFromFile());
         newView.printDelCommands();
+    }
+    public void infoPage() {
+        PhoneView newView = new PhoneView();
+        newView.printAllPhones(this.mainConnector.getAllFromFile());
+        newView.printDescrCommands();
+//        newView.descrPhone();
+    }
+    public void descrPage() {
+        PhoneView newView = new PhoneView();
+        newView.descrPhone();
+    }
+    public void describElem(String posNum) {
+        ArrayList<HashMap<String,String>> posList = this.mainConnector.getAllFromFile();
+        HashMap<String,String> pos = new HashMap<>();
+        for (int i = 0; i < posList.size() ; i++) {
+            if (posNum.compareTo(Integer.toString(i+1)) == 0) {
+                pos = (HashMap) posList.get(i);
+                System.out.printf("%s: %s", pos.get("label"), pos.get("descr"));
+                System.out.println();
+                break;
+            }
+        }
     }
     public void makePage() {
         PhoneView newView = new PhoneView();
@@ -86,7 +117,7 @@ public class Controller {
     }
 
     public void deleteElem(String posNum) {
-        ArrayList posList = this.mainConnector.getAllFromFile();
+        ArrayList<HashMap<String,String>> posList = this.mainConnector.getAllFromFile();
         HashMap<String,String> pos = new HashMap<>();
         for (int i = 0; i < posList.size() ; i++) {
             if (posNum.compareTo(Integer.toString(i+1)) == 0) {

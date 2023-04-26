@@ -12,35 +12,13 @@ import java.util.Scanner; // Import the Scanner class to read text files
  * Коннектор к файлу с телефонами
  */
 public class DBFileConnector implements IDBconnector<PhoneModel> {
-    private ArrayList<HashMap> dataBase = new ArrayList<>();
+    private ArrayList<HashMap<String,String>> dataBase = new ArrayList<>();
     private final String fileName;
     public static void main(String[] args) {
-//        Тестовые наполнения:
-//        GenerateDBFile("PhoneDB");
-//        readFromFile2Array("PhoneDB");
-//        ArrayList testDataBase = DBFullFillment();
         DBFileConnector newConnect = new DBFileConnector("PhoneDB");
         newConnect.DBFullFillment();
         HashMap<String,String> newFilter = new HashMap<>();
         newFilter.put("memory","64");
-//        newFilter.put("name","honor");
-//        System.out.printf("По фильтру %s найдено ", newFilter);
-//        System.out.println(newConnect.getFilteredDB(newFilter));
-//        System.out.println(newConnect.dataBase);
-//        HashMap<String, String> prod5 = new HashMap<>();
-//        prod5.put("id", "1");
-//        prod5.put("name", "IPhone");
-//        newConnect.updProd2DB(prod5);
-
-
-
-//        System.out.println(newConnect.dataBase);
-//        newConnect.write2FileFromArray("PhoneDB", testDataBase);
-//        System.out.println();
-//        System.out.println(newConnect.readFromFile2Array());
-//        System.out.println(newConnect.getProductByID("2"));
-//        System.out.println(newConnect.delProdFromDB("2"));
-
     }
 
     /** Коннектор к файлу
@@ -138,7 +116,7 @@ public class DBFileConnector implements IDBconnector<PhoneModel> {
     /** Дополнительный модуль для заполнение тестовой базы
      */
     public void DBFullFillment() {
-        ArrayList<HashMap> dataBase = new ArrayList<>();
+        ArrayList<HashMap<String,String>> dataBase = new ArrayList<>();
         HashMap<String, String> prod1 = new HashMap<>();
         prod1.put("id", "1");
         prod1.put("name", "IPhone");
@@ -224,14 +202,14 @@ public class DBFileConnector implements IDBconnector<PhoneModel> {
      * @return возвращает ArrayList
      */
     @Override
-    public ArrayList getAllDb() {
+    public ArrayList<HashMap<String,String>> getAllDb() {
         return this.dataBase;
     }
 
     @Override
-    public ArrayList getAllFromFile() {
+    public ArrayList<HashMap<String,String>> getAllFromFile() {
         // read data to ArrayList dataBase
-        ArrayList<HashMap> resultArray = new ArrayList<>();
+        ArrayList<HashMap<String,String>> resultArray = new ArrayList<>();
         try {
             File myObj = new File(this.fileName);
             Scanner myReader = new Scanner(myObj);
@@ -322,7 +300,7 @@ public class DBFileConnector implements IDBconnector<PhoneModel> {
         return false;
     }
 
-    public ArrayList<HashMap> getDataBase() {
+    public ArrayList<HashMap<String,String>> getDataBase() {
         return dataBase;
     }
 
