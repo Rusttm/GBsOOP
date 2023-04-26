@@ -1,4 +1,4 @@
-{name=IPhone, id=1}
-{name=Xiaomi, id=2}
-{name=Honor, id=3}
-{name=Google, id=4}
+{memory=64, name=IPhone, id=1}
+{memory=128, name=Xiaomi, id=2}
+{memory=64, name=Honor, id=3}
+{memory=32, name=Google, id=4}
