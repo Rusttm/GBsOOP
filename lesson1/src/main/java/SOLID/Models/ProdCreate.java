@@ -6,7 +6,8 @@ import java.util.HashMap;
  * Класс для создания продукта
  */
 public class ProdCreate extends PhoneProd {
-    private static int id;
+    int id = 1;
+    private static int counter;
     HashMap prod;
 
     /**
@@ -19,7 +20,8 @@ public class ProdCreate extends PhoneProd {
      * @param price Цена
      */
     public ProdCreate(String name, String model, String year, String brand, String memory, String descr, String price) {
-        id++;
+        this.id = counter;
+        counter++;
         this.prod= new HashMap();
         this.prod.put("id", id);
         this.prod.put("name", name);

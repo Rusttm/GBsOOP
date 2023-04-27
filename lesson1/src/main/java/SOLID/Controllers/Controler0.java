@@ -23,6 +23,7 @@ public class Controler0 implements IController0{
         ProdInfo newInformer = new ProdInfo<ProdCreate>();
         System.out.println("Берем из объекта ключ label:");
         System.out.println(newInformer.getInfo(newPhone1, "label"));
+        System.out.println();
 
         // можем добавить в объект ключ-значение
         ProdAddInfo newAdder = new ProdAddInfo();
