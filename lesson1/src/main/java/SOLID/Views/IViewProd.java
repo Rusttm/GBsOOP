@@ -4,5 +4,8 @@ package SOLID.Views;
  * @param <T> объект продукта
  */
 public interface IViewProd<T> {
-    public void showProd();
+    /**Метод для вывода продукта на экран или страницу
+     * @param prod любой продукт(Объект)
+     */
+    void showProd(T prod);
 }

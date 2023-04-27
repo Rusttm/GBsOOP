@@ -2,9 +2,22 @@ package SOLID.Models;
 
 import java.util.HashMap;
 
-public class ProdCreate extends Prod {
+/**
+ * Класс для создания продукта
+ */
+public class ProdCreate extends PhoneProd {
     private static int id;
     HashMap prod;
+
+    /**
+     * @param name Имя
+     * @param model Модель
+     * @param year Год
+     * @param brand Производитель
+     * @param memory Память
+     * @param descr Описание
+     * @param price Цена
+     */
     public ProdCreate(String name, String model, String year, String brand, String memory, String descr, String price) {
         id++;
         this.prod= new HashMap();
@@ -20,15 +33,30 @@ public class ProdCreate extends Prod {
 //        System.out.println(this.prod);
     }
 
+    /**
+     * Метод выдает HashMap продукта(объекта)
+     * @return HashMap
+     */
     public HashMap getProd() {
         return this.prod;
     }
 
+    /** Так как наследование идет от HashMap
+     * то можно воспользоваться методом из Материнского класса
+     * метод get
+     * @param key ключ
+     * @return значение
+     */
     public Object get(String key) {
         return super.get(key);
     }
+
+    /**То же самое -взял из материнского класса
+     * добавляет в объект ключ-значение
+     * @param key ключ
+     * @param value значение
+     */
     public void put(String key, String value) {
-//        System.out.println(this.prod);
         this.prod.put(key, value);
     }
 

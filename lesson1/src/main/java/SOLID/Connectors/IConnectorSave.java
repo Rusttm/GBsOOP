@@ -2,10 +2,8 @@ package SOLID.Connectors;
 
 
 /** Интерфейс для записи позиции в Базу данных
- * @param <T> Указывается объект "позиция"
+ * @param <T> Указывается продукт (объект)
  */
 public interface IConnectorSave<T> {
-    public default void save2DB(T entry) {
-        // save position to DB
-    }
+    void save2DB(T prod);
 }
