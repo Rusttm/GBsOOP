@@ -17,7 +17,6 @@ import java.util.HashMap;
  * */
 public interface IDBconnector <T> {
 
-
     /** Метод выдает продукты которые подходят по фильтрам
      * @param filterMap получает на входе HashMap {фильтр:значение}
      * @return возвращает ArrayList с продуктами, либо пустой
@@ -30,7 +29,6 @@ public interface IDBconnector <T> {
      */
     HashMap<String,String> getProductFromDBByID(String id);
 
-
     /** Метод выдает всю базу из памяти
      * @return в виде ArrayList
      */
@@ -41,13 +39,11 @@ public interface IDBconnector <T> {
      */
     ArrayList<HashMap<String,String>> getAllFromFile();
 
-
     /** Метод для добавления продукта
      * @param prod новые данные в виде HashMap
      * @return возвращает true если добавил, и false -если нет
      */
     boolean putProd2DB(T prod);
-
 
     /** удаляет позицию по id
      * @param id указать id удаляемой позиции
