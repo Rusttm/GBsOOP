@@ -1,0 +1,3 @@
+{descr=refurbished, memory=64, year=2015, price=50000, name=iPhone, screen=6.5, model=SE, id=1, label=iPhone SE 64, brand=Apple}
+{descr=, memory=256, НовыйКлюч=НовоеЗначение, year=2020, price=125000, name=iPhone, model=12 Pro Max, id=2, label=iPhone 12 Pro Max 256, brand=Apple}
+{descr=, memory=128, year=2018, price=11000, name=Redmi, model=MI9, id=3, label=Redmi MI9 128, brand=Xiaomi}
